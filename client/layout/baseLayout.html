@@ -1,0 +1,20 @@
+<template name="baseLayout">
+
+  {{>navigation}}
+
+<div class="container-fluid">
+
+    <div class="col-lg-2 sidebar">
+      {{>sidebar}}
+
+    </div>
+
+    <div class="col-lg-10">
+
+      {{>yield}} <!-- load page here based on routing rules -->
+
+    </div>
+
+</div> <!-- end main content container -->
+
+</template>
