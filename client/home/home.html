@@ -1,12 +1,24 @@
 <template name="home">
- 
- <div class="well well-large col-lg-12">
 
-  <label for="posttext" class="col-lg-2"> Say Something   </label>
+  <div class="container">
 
-  <input class="col-lg-7" type="text" name="posttext" id="posttext" value="">
+    <div class="well well-large col-lg-10">
+
+  <label for="posttext" class="col-lg-2"> What's your story? </label>
+
+  <input class="col-lg-10" type="text" name="posttext" id="posttext" value="">
 
  </div>
 
+    <div class="col-lg-12">
+
+      <ul id="postList" class="">
+
+      {{>post}}
+
+      </ul>
+
+     </div>
+</div>
 
 </template>

@@ -1,0 +1,41 @@
+.navbar-fixed-top {max-height:50px;}
+
+.sidebar {
+
+  padding-left: 0px;
+
+}
+
+.body-content{ }
+
+/* ---------------------------------------------------------
+      POST
+   ---------------------------------------------------------
+*/
+
+#postList{
+  height:80vh;
+  /* vh = viewport height */
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+
+.username{
+  font-weight: bold;
+}
+
+.postComment{
+
+  list-style:none;
+}
+
+
+.commentBody {
+
+  margin-left : 45px;
+}
+
+/* ---------------------------------------------------------
+
+   ---------------------------------------------------------
+*/

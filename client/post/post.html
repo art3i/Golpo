@@ -1,0 +1,54 @@
+<template name="post">
+
+
+<div class="media">
+
+  <a class="pull-left" href="#">
+
+    <img class="media-object" src="/pimg/mm.jpg" width = "60px" data-src="holder.js/64x64">
+
+  </a>
+
+  <div class="media-body">
+    <h6 class="username"> Will Stash </h6>
+    <p class="postContent"> weguiakwefjiewf uewifd sufeu suduue sd dejosfd </p>
+
+    <div class="media">
+        {{#if likeCount}}
+        <span class="badge badge-success"> {{likeCount}}</span>  people like this
+        {{/if}}
+
+        <h4 class="media-heading">
+
+            <a class="likebtn" href="#"> <small> Like </small> </a>
+
+        </h4>
+            <ul>
+              {{>postcomment}}
+        </ul>
+    </div>
+  </div>
+
+</div>
+
+
+</template>
+
+
+
+<template name="postcomment">
+
+    <li class="well postComment col-lg-8">
+
+      <a class="pull-left" href="/user">
+          <img class="img-rounded" src="/pimg/gg.jpg" width="30px" alt="#" />
+      </a>
+      <div class="commentBody">
+      <h6 class="username"> Joe Elena </h6>
+      <p class="commentText"> hmm nice try there! </p>
+      </div>
+
+    </li>
+
+
+</template>
