@@ -10,8 +10,8 @@
   </a>
 
   <div class="media-body">
-    <h6 class="username"> Will Stash </h6>
-    <p class="postContent"> weguiakwefjiewf uewifd sufeu suduue sd dejosfd </p>
+    <h6 class="username"> {{_id}} </h6>
+    <p class="postContent"> {{text}} </p>
 
     <div class="media">
         {{#if likeCount}}
@@ -20,12 +20,21 @@
 
         <h4 class="media-heading">
 
-            <a class="likebtn" href="#"> <small> Like </small> </a>
+            <a class="likeBtn" href="#"> <small> Like </small> </a>
+            <a class="commentBtn" href="#"> <small> Comment </small> </a>
 
         </h4>
+          <div class="col-lg-8 commentInput">
+            <input class="" type="text" name="commentInput" id="commentText" value="" placeholder = "comment ... ">
+
+          </div>
+
             <ul>
-              {{>postcomment}}
-        </ul>
+              {{#each getPostComments}}
+              {{>postComment}}
+
+              {{/each}}
+            </ul>
     </div>
   </div>
 
@@ -36,7 +45,8 @@
 
 
 
-<template name="postcomment">
+<template name="postComment">
+
 
     <li class="well postComment col-lg-8">
 
@@ -44,8 +54,8 @@
           <img class="img-rounded" src="/pimg/gg.jpg" width="30px" alt="#" />
       </a>
       <div class="commentBody">
-      <h6 class="username"> Joe Elena </h6>
-      <p class="commentText"> hmm nice try there! </p>
+      <h6 class="username"> {{_id}} </h6>
+      <p class="commentText"> {{text}} </p>
       </div>
 
     </li>
