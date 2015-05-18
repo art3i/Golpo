@@ -17,7 +17,8 @@ Meteor.publish("likes", function(postId){
 Meteor.publish("userData", function (userId) {
   if (this.userId) {
 
-    return Meteor.users.find() //during devlopment for testing purpose to show all fields
+//return Meteor.users.find()
+// using during devlopment only for testing purpose (give full db access to client) , uncomment otherwise
 
     return Meteor.users.find(
               {_id: this.userId},
@@ -80,45 +81,23 @@ Meteor.methods({
 
             // Some pre- built-in fields :
             //  _id  ~ unique field, can be called by Meteor.userId()
-            // emails: [ { address: "cool@example.com", verified: true },
+            // emails: [ { address: "cool@example.com", verified: true }, //an array
             //  { address: "another@different.com", verified: false } ],
             // emails ~ unique | each email address can only belong to one user.
 
-            //>db.mycol.update({'title':'MongoDB Overview'},{$set:{'title':'New MongoDB Tutorial'}},{multi:true})
-            //>db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA}) //if id match -update ; else fresh insert
 
-            var userDB = Meteor.users.find({_id: info.loginID});
+Meteor.users.update(info.loginID, {$set:
+                          {
+                            "profile.fullName": info.fullName,
+                           "profile.location": info.location,
 
-  //Players.update(this._id, { name: this.name, score: this.score + 5 }, { upsert: true });
-//Meteor.users.update(Meteor.userId(), {$set: {name: "miaw"}});
-//Meteor.users.update(Meteor.userId(), {$set: {'profile.isAdmin': true}});
-
-  userDB.update(
-
-  info.loginID,
+                           }
 
 
-    { $set: {
-
-    //username: info.username,
-    //_id: info.loginID,
-    // profile :   {
-    //               name: info.fullName,
-    //               dob: info.dob,
-    //               location: info.location,
-    //
-    //             } ,
-    'ranking' : info.ranking,
-
-      }
-
-  }
+                           });
 
 
-
-  );
-
-  console.log( " inServer - profile data updated ");
+  console.log( " inServer - profile data updated by " + info.fullName + " & dbID: " + info.loginID);
 
 },
 

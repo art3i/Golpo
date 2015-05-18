@@ -20,8 +20,8 @@ Template.profile.helpers({
   userDetail : function () {
 
     //console.log(Meteor.users.find());
-  //return Meteor.users.find({'_id': Meteor.userId()});
- return Meteor.users.find();
+   return Meteor.users.find({"_id": Meteor.userId()});
+// return Meteor.users.find();
 
 
 },
@@ -52,8 +52,6 @@ Template.profile.events( {
           fullName : fullName,
           location : location,
 
-
-          ranking : "level - 1",
 
         };
 

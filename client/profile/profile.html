@@ -1,15 +1,22 @@
 <template name="profile">
 
+  
+  {{#if currentUser}}
+
+
 <div class="container">
 
-  <h3> My Profile  </h3>
+  <div class="row">
 
-  <h5> Meteor.users db collection testing </h5>
+    <div class="col-lg-8 showProfileData">
+
+  <h3> MY PROFILE  </h3>
+
 
   {{#each userDetail}}
 
-  <p> ID:  {{_id}} </P>
-  <p> Username:  {{username}} </P>
+  <p> User ID: <i> {{_id}} </i> </P>
+
 
       {{#each this.emails}}
 
@@ -17,13 +24,22 @@
 
       {{/each}}
 
-     
 
-  <p> createdAt:  {{createdAt}} </p>
+    <p>  Name : {{this.profile.fullName}}  </P>
+    <p>  Location : {{this.profile.location}}  </P>
+
+
+
+  <p> account created on :  {{createdAt}} </p>
 
 {{/each}}
 
+    </div>
+
 </div>
+
+</div> <!-- END profile container -->
+
 
 <hr>
 
@@ -80,6 +96,6 @@
 
 </div>
 
-
+{{/if}}
 
 </template>
