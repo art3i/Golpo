@@ -4,28 +4,16 @@
 
   <ul class="nav nav-stacked">
 
-    <li role="presentation"><a href="{{pathFor 'newsfeed'}}">News Feed</a></li>
+    <li role="presentation"><a href="{{pathFor 'explore'}}">Explore</a></li>
+    <li role="presentation"><a href="{{pathFor 'dearDiary'}}"> Dear Diary </a></li>
     <li role="presentation"><a href="{{pathFor 'profile'}}">Profile</a></li>
     <li role="presentation"><a href="{{pathFor 'friends'}}"> Friends</a></li>
-    <li role="presentation"><a href="/photo"> Photo</a></li>
+    <li role="presentation"><a href="/photo"> Photo </a></li>
     <li role="presentation"><a href="{{pathFor 'favourites'}}">Favourites</a></li>
 
   </ul>
 
 {{/if}}
-
-<div class="container" style="background:grey; width : 200px; color:white; z-index : 99;">
-
-  <h3> Test Block </h3>
-
-  {{#each userData}}
-
-  <p> ID:  {{_id}} </P>
-  <p> Username:  {{username}} </P>
-
-{{/each}}
-</div>
-
 
 
 </template>

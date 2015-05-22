@@ -3,28 +3,7 @@
 {{#if currentUser}}
 
   <div class="container">
-
-    <div class="well well-large col-lg-10">
-
-  <label for="posttext" class="col-lg-2"> What's your story? </label>
-
-  <input class="col-lg-10" type="text" name="posttext" id="postText" value="">
-
- </div>
-
-    <div class="col-lg-12">
-
-      <ul id="postList" class="unstyled">
-
-          {{#each getPosts}}
-
-              {{>post}}
-
-          {{/each}}
-
-      </ul>
-
-     </div>
+ 
 </div>
 
 {{/if}}

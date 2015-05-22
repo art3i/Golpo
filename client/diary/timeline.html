@@ -1,0 +1,24 @@
+<template name="timeline">
+
+{{#if currentUser}}
+
+  <div class="container">
+
+
+{{#each getMyStory}}
+    <div class="well well-large col-lg-10">
+
+
+      <p class="storyMeta"> {{formatDate date}} </p>
+
+      <p> {{ content }} </p>
+
+     </div>
+
+  {{/each}}
+
+</div>
+
+{{/if}}
+
+</template>

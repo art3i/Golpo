@@ -1,9 +1,32 @@
-Meteor.publish("posts" , function(userid){
+// ----------------------------------------------------------------------------------------
+// -------------- PUBLICATIONS ------------------------
+// ----------------------------------------------------------------------------------------
+ 
 
-      return Posts.find({});
+Meteor.publish("myStory" , function(userId){
+
+// this will publish all types of self story regarding of public/ private filter to the timeline
+// of the user.
+
+// return StoryBook.find();  // uncomment for testing only;
+
+       return StoryBook.find({"ownerID" : userId});
 
 
- });
+  });
+
+// ------------------
+
+Meteor.publish("worldStory" , function(userId){
+
+  // this will publish all the published public stories of all storytellers in the explore section
+
+  return StoryBook.find();  // haven't filter just public stories yet ;
+
+
+    });
+
+
 
 Meteor.publish("likes", function(postId){
 
@@ -11,11 +34,14 @@ Meteor.publish("likes", function(postId){
 
 });
 
+// --------------------------------- END story publications ----------------------------------
 
-// ----------- Publication for testing during devlopment ---------
 
-Meteor.publish("userData", function (userId) {
+Meteor.publish("myAccount", function (userId) {
   if (this.userId) {
+
+// publishing self accounts and profile details (except password) for the
+// logged in user .
 
 //return Meteor.users.find()
 // using during devlopment only for testing purpose (give full db access to client) , uncomment otherwise
@@ -32,10 +58,61 @@ Meteor.publish("userData", function (userId) {
 });
 
 
-// -------------- END test publications ------------------------
+// ---------
 
+Meteor.publish("storytellers", function (userId) {
+  if (this.userId) {
+
+// publishing just name and id of every profile in our site for explore stream to
+// show storytellers tiny details
+
+    return Meteor.users.find(
+              {},
+              {fields: {'profile.fullName': 1, '_id': 1,}}
+
+                            );
+
+                  } else {
+                            this.ready();
+                          }
+});
+
+// --------------------------------- END accounts/profile publications ----------------------------------
+
+
+
+// ----------------------------------------------------------------------------------------
+// -------------- END  PUBLICATIONS ------------------------
+// ----------------------------------------------------------------------------------------
+
+
+// ----------------------------------------------------------------------------------------
+// -------------- Meteor METHODS ------------------------
+// ----------------------------------------------------------------------------------------
 
 Meteor.methods({
+
+
+  'addToStoryBook' : function (data){
+
+    StoryBook.insert({
+
+       authorID   : data.authorID,
+       authorName : data.authorName,
+
+        content   : data.content,
+        date      : new Date(),
+        isPublish : data.isPublish,
+        privacy   : data.privacy,
+
+    });
+
+        console.log("new story added to StoryBook by : " + data.authorName );
+
+  },
+
+  // ------------- END adding data to diary collection -------------
+
 
     'addPost' : function (options){
 
@@ -66,8 +143,13 @@ Meteor.methods({
 // this is to clear all db collections during development.
 //here ~ remove({}) ~ this {} is needed to remove all documents
 
+// comment out this method before deployment
+
+//   Meteor.call('clearAllDB');
+
       Posts.remove({});
       Likes.remove({});
+      StoryBook.remove({});
       Meteor.users.remove({});
       console.log( " Meteor.users.removeD ");
 
@@ -75,7 +157,7 @@ Meteor.methods({
     },
 
 
-// ------------ inserting data into Meteor.users that came with accounts-base package -----------
+// ------------ inserting /updating data into Meteor.users that came with accounts-base package -----------
 
 'addUserDetails' : function (info){
 
@@ -104,4 +186,14 @@ Meteor.users.update(info.loginID, {$set:
 // ------------ DONE inserting data into Meteor.users -----------
 
 
+
+
+
+
+
 });
+
+
+// ----------------------------------------------------------------------------------------
+// -------------- END  Meteor METHODS ------------------------
+// ----------------------------------------------------------------------------------------

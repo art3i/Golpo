@@ -1,3 +1,9 @@
+/* ---------------------------------------------------------
+      Base
+   ---------------------------------------------------------
+*/
+
+
 .navbar-fixed-top {max-height:50px;}
 
 #signOutBtn{
@@ -11,6 +17,25 @@
 }
 
 .body-content{ }
+
+
+/* ---------------------------------------------------------
+      Diary & Timeline
+   ---------------------------------------------------------
+*/
+
+
+#storyInput{
+  padding-bottom: 15px;
+}
+
+.storyMeta {
+
+  font: italic 500 12px "freight-text-pro", Georgia, "Times New Roman", Serif;
+  color: #222;
+  margin-bottom: 10px;
+}
+
 
 /* ---------------------------------------------------------
       POST
@@ -27,30 +52,6 @@
    */
  }
 
-.username{
-  font-weight: bold;
-}
-
-.postComment{
-
-  list-style:none;
-  padding-right : 0;
-}
-
-.commentInput{
-  padding-left : 40px;
-  margin-bottom : 10px;
-
-}
-
-.commentInput input{
-  width: 100%;
-}
-
-.commentBody {
-
-  margin-left : 45px;
-}
 
 /* ---------------------------------------------------------
       PROFILE

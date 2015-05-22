@@ -5,7 +5,7 @@ Template.profile.rendered = function (){
 
   Tracker.autorun(function(){
 
-   Meteor.subscribe("userData",Meteor.userId());
+   Meteor.subscribe("myAccount",Meteor.userId());
 
     //Tracekr calls these func everytime when anything changes (Meteor Reactivity module)
 
