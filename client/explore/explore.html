@@ -16,6 +16,35 @@
 
       <p> {{ content }} </p>
 
+
+
+           <div class="well well-large col-lg-10">
+
+             <form class="commentINform form-horizontal" role="form">
+
+               <input class="comment col-lg-9 pull-right" type="text" name="opinion"  value="" placeholder=" your feedback ... ">
+               <input name="opinionParentID" type="hidden"  value="{{_id}}" >
+
+
+             </form>
+
+              <br> <br>
+
+             <div class="commentView">
+
+             {{#each getCurrentStoryComments}}
+
+            <p> <strong> {{authorName}} </strong> <em> said : </em> </p>
+
+            <p> {{content}} </p>
+
+              {{/each}}
+
+            </div>
+
+            </div>
+
+
    </div>
 
   {{/each}}

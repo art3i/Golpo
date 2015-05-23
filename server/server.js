@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------------------------
 // -------------- PUBLICATIONS ------------------------
 // ----------------------------------------------------------------------------------------
- 
+
 
 Meteor.publish("myStory" , function(userId){
 
@@ -10,7 +10,7 @@ Meteor.publish("myStory" , function(userId){
 
 // return StoryBook.find();  // uncomment for testing only;
 
-       return StoryBook.find({"ownerID" : userId});
+       return StoryBook.find({"authorID" : userId});
 
 
   });
@@ -25,6 +25,19 @@ Meteor.publish("worldStory" , function(userId){
 
 
     });
+
+
+// ------------------
+
+
+Meteor.publish("storyOpinionDB" , function(userId){
+
+
+  return StoryOpinion.find();
+
+
+    });
+
 
 
 
@@ -111,32 +124,30 @@ Meteor.methods({
 
   },
 
-  // ------------- END adding data to diary collection -------------
+  // ------------- END adding data to StoryBook collection -------------
+
+  'postComment' : function (data){
+
+    StoryOpinion.insert({
+
+        parentID  : data.parentID,
+       authorID   : data.authorID,
+       authorName : data.authorName,
+
+        content   : data.content,
+        date      : new Date(),
 
 
-    'addPost' : function (options){
+    });
 
-      Posts.insert({
+        console.log("new comment added by : " + data.authorName );
 
-          text : options.postText,
-          owner : options.owner ,
-          date : new Date(),
-          parent : options.parent,
+  },
 
-      });
+  // ------------- END  post comment method -------------
 
-    },
 
-    'removePost': function(id){
 
-      Posts.remove({ _id:id });
-    },
-
-    'removeAllPost' : function (){
-
-      Posts.remove({});
-
-    },
 
     'clearAllDB' : function (){
 
@@ -147,10 +158,12 @@ Meteor.methods({
 
 //   Meteor.call('clearAllDB');
 
-      Posts.remove({});
+
       Likes.remove({});
       StoryBook.remove({});
       Meteor.users.remove({});
+      StoryBook.remove({});
+      StoryOpinion.remove({});
       console.log( " Meteor.users.removeD ");
 
 

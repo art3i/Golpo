@@ -1,33 +1,28 @@
 
-Template.explore.rendered = function (){
+Template.timeline.rendered = function (){
 
   Tracker.autorun(function(){
 
-    Meteor.subscribe("worldStory", Meteor.userId());
+    Meteor.subscribe("myStory", Meteor.userId());
+
     Meteor.subscribe("storyOpinionDB", Meteor.userId());
-
-    Meteor.subscribe("storytellers", Meteor.userId());
-
 
   })
 
 
 } ;
 
+Template.timeline.helpers({
 
-Template.explore.helpers({
+  getMyStory : function () {
 
-  getWorldStory : function () {
+  return myStory=StoryBook.find({"authorID": Meteor.userId()}, {sort:{date: -1}});
 
-  return StoryBook.find({}, {sort:{date: -1}});
+
+
 },
 
-
-getStorytellers: function () {
-
-return Meteor.users.find();
-},
-
+// ---------------- END getMyStory --------------
 
 
   getCurrentStoryComments : function () {
@@ -45,14 +40,19 @@ return Meteor.users.find();
 
 
 
+getMyProfile : function () {
+
+return Meteor.users.find({"_id": Meteor.userId()});
+},
+
+
 });
 
 
+// ------------------------ timeline event handlers -------------------------
 
-// ------------------------ explore event handlers -------------------------
 
-
-Template.explore.events( {
+Template.timeline.events( {
 
   'submit .commentINform' : function (event, tmpl){
 
@@ -69,7 +69,7 @@ Template.explore.events( {
 
         var content = event.target.opinion.value;
 
-      //  console.log(parentID +" " + content );
+        console.log(parentID +" " + content );
 
         var authorID = Meteor.userId();
         var authorName;
@@ -93,7 +93,8 @@ Template.explore.events( {
 
         Meteor.call('postComment', data );
 
-        
+      //  console.log( "postComment called");
+
         //now clear the post input field
 
         $('.comment').val("").select().focus();
