@@ -10,11 +10,23 @@
 
   <div class="well well-large col-lg-10">
 
-      <p> {{authorName}} </p>
+      <div class="storyAuthor" >
 
-      <p class="storyMeta"> {{formatDate date}} </p>
+            <div class="avatar pull-left">
 
-      <p> {{ content }} </p>
+              <a href="#" > <img src="pimg/{{authorID}}.jpg" width="60px" height="60px" alt="" />  </a>
+
+            </div>
+
+            <div class="nameMeta ">
+                <p> <a class="authorName" href="#"> {{authorName}} </a> </p>
+
+                <p class="storyMeta"> {{formatDate date}} </p>
+            </div>
+
+      </div>
+
+      <p class="storyContent"> {{ content }} </p>
 
 
 
@@ -34,9 +46,23 @@
 
              {{#each getCurrentStoryComments}}
 
-            <p> <strong> {{authorName}} </strong> <em> said : </em> </p>
+             <div class="opinionAuthor" >
 
-            <p> {{content}} </p>
+                   <div class="avatarOpinion pull-left">
+
+                     <a href="#" > <img src="pimg/{{authorID}}.jpg" width="40px" height="40px" alt="" />  </a>
+
+                   </div>
+
+                   <div class="nameMeta ">
+                       <p> <a class="authorName" href="#"> {{authorName}} </a> </p>
+
+                       <p class="storyMeta"> {{formatDate date}} </p>
+                   </div>
+
+             </div>
+
+            <p class="opinionContent"> {{content}} </p>
 
               {{/each}}
 

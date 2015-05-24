@@ -18,6 +18,57 @@
 
 .body-content{ }
 
+/* ---------------------------------------------------------
+      Avatar & story Meta
+   ---------------------------------------------------------
+*/
+
+.avatar {
+
+      width: 60px;
+      height: 60px;
+      margin-right: 20px;
+      background-color: #f2ddbf;
+  }
+.avatarOpinion{
+      width: 40px;
+      height: 40px;
+      margin-right: 20px;
+      background-color: #fa8e2a;
+
+}
+.authorName{
+
+  color: #3F729B;
+  font-weight: bold;
+}
+.authorName:hover, .authorName:active {
+
+    text-decoration: none;
+}
+
+.storyMeta {
+
+    margin-bottom: 5px;
+}
+
+
+
+/* -------- CONTENT ----------- */
+
+.storyContent {
+
+    margin-left: 80px;
+}
+.opinionContent{
+
+    margin-left: 60px;
+}
+
+.storyContent, .opinionContent {
+
+  margin-bottom: 15px;
+}
 
 /* ---------------------------------------------------------
       Diary & Timeline
