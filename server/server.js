@@ -92,11 +92,64 @@ Meteor.publish("storytellers", function (userId) {
 
 // --------------------------------- END accounts/profile publications ----------------------------------
 
+// ---------------- Image meta data publications ------------------
+
+
+Meteor.publish("images", function(){
+                return Images.find();
+
+                });
+
+// ------------------- END Images publications ------------------------
+
+
+
 
 
 // ----------------------------------------------------------------------------------------
 // -------------- END  PUBLICATIONS ------------------------
 // ----------------------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------------------
+// -------------- access rules for GridFS ------------------------
+// ----------------------------------------------------------------------------------------
+
+Images.allow({
+    download: function(userId, fileObj) {
+        return true
+    },
+
+    update: function(userId, fileObj) {
+       return true;
+       },
+
+    insert: function() {
+        return true;
+        },
+
+    // remove: function(userId, fileObj) {
+    //     return true;
+    // },
+
+})
+
+Images.deny({
+    remove: function(userId, fileObj) {
+        return false;
+    },
+
+
+})
+
+
+
+// ----------------------------------------------------------------------------------------
+// -------------- END access rules for GridFS ------------------------
+// ----------------------------------------------------------------------------------------
+
+
+
+
 
 
 // ----------------------------------------------------------------------------------------
@@ -198,9 +251,36 @@ Meteor.users.update(info.loginID, {$set:
 
 // ------------ DONE inserting data into Meteor.users -----------
 
+// ------------- method for image upload to GridFS filesystem----------------
+
+'saveImage' : function (data){
+
+var data=data;
+  console.log("miaw: "+data.file);
+
+         Images.insert(data.file, function (err, fileObj) {
+             if (err){
+                // handle error
+                console.log("error uploading image");
+             }
+
+             else {
+
+                var imagesURL = {
+                   "profile.image": "/cfs/files/images/" + fileObj._id
+                    };
+
+                  Meteor.users.update(data.userId, {$set: imagesURL});
+
+             }
+           });
 
 
 
+
+      console.log("Image saved to GridFS local storage : " + data.authorName );
+
+},
 
 
 

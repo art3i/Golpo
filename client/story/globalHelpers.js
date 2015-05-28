@@ -14,3 +14,24 @@ Template.registerHelper('formatDate', function(date) {
 
 
 });
+
+Template.registerHelper('allProfilePhoto', function() {
+
+  var profilePhotoID;
+
+  var userAccount=Meteor.users.find({"_id": Meteor.userId()});
+
+  userAccount.forEach(function (userDB) {
+
+                profilePhotoID = userDB.profile.photoID;
+                   console.log( profilePhotoID);
+
+                  });
+
+
+  return Images.find({"_id": profilePhotoID});
+
+  // Images is an FS.Collection instance
+
+
+});

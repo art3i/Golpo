@@ -1,6 +1,6 @@
 <template name="profile">
 
-  
+
   {{#if currentUser}}
 
 
@@ -11,6 +11,15 @@
     <div class="col-lg-8 showProfileData">
 
   <h3> MY PROFILE  </h3>
+
+  {{#each myProfilePic}}
+
+  <div>
+        <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt="" class="" width="200px" height="200px" /></a>
+  </div>
+
+  {{/each}}
+
 
 
   {{#each userDetail}}
@@ -45,7 +54,22 @@
 
 <div class="container">
 
-  <h3> Update Your Profile </h3>
+<h3> Change Profile Photo </h3>
+
+<small> <em> Recomended file size : less than 1 MB </em> </small> <br>
+
+<br>
+    <div class="col-lg-8">
+        <input type="file" class="myFileInput" name="profilePhoto">
+
+    </div>
+
+<br> <br> <hr>
+
+
+
+
+  <h3> Update Profile Info </h3>
 
 <br> <br>
 
@@ -85,7 +109,7 @@
           <div class="form-group">
             <div class="col-lg-2 pull-right">
 
-              <button type="submit" class="btn btn-primary" style="width:100%;"> Update </button>
+              <button type="submit" name="submit" class="btn btn-primary" style="width:100%;"> Update </button>
 
             </div>
           </div>	 <!-- end form group -->

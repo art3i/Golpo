@@ -7,6 +7,9 @@ Template.profile.rendered = function (){
 
    Meteor.subscribe("myAccount",Meteor.userId());
 
+
+   Meteor.subscribe("images");
+
     //Tracekr calls these func everytime when anything changes (Meteor Reactivity module)
 
   })
@@ -23,8 +26,29 @@ Template.profile.helpers({
    return Meteor.users.find({"_id": Meteor.userId()});
 // return Meteor.users.find();
 
-
 },
+
+
+  myProfilePic: function () {
+
+    var profilePhotoID;
+
+    var userAccount=Meteor.users.find({"_id": Meteor.userId()});
+
+    userAccount.forEach(function (userDB) {
+
+                  profilePhotoID = userDB.profile.photoID;
+                     console.log( profilePhotoID);
+
+                    });
+
+
+    return Images.find({"_id": profilePhotoID});
+
+    // Images is an FS.Collection instance
+
+  },
+
 
 });
 
@@ -34,6 +58,64 @@ Template.profile.helpers({
 // ---------------------- Capturing form data for updating user profile --------------------
 
 Template.profile.events( {
+
+  'change .myFileInput': function(event, template) {
+
+       FS.Utility.eachFile(event, function(file) {
+
+
+
+         Images.insert(file, function (err, fileObj) {
+             if (err){
+                // handle error
+                console.log("error uploading image");
+             }
+
+             else {
+                // handle success depending what you need to do
+               var userId = Meteor.userId();
+
+               var profilePhoto = {
+                 "profile.photoID": fileObj._id
+               };
+
+               Meteor.users.update(userId, {$set: profilePhoto});
+
+               console.log("done uploading image");
+             }
+           });
+      });
+    },
+
+
+
+
+
+
+
+  // 'change .myFileInput': function(event, template) {
+  //
+  //    FS.Utility.eachFile(event, function(file) {
+  //
+  //
+  //      var data= {
+  //
+  //        file : file,
+  //        userId : Meteor.userId(),
+  //
+  //      };
+  //
+  //      Meteor.call('saveImage', data );
+  //
+  //      //alert(data.file);
+  //
+  //   });
+  // },
+
+
+
+
+
 
   'submit #profileUpdateForm' : function (e, tmpl){
 
