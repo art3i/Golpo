@@ -8,6 +8,8 @@ Template.explore.rendered = function (){
 
     Meteor.subscribe("storytellers", Meteor.userId());
 
+    Meteor.subscribe("images");
+
 
   })
 
@@ -73,12 +75,14 @@ Template.explore.events( {
 
         var authorID = Meteor.userId();
         var authorName;
+        var authorPhotoID;
 
         var authorAccount=Meteor.users.find({"_id": authorID});
 
         authorAccount.forEach(function (acc) {
 
                         authorName = acc.profile.fullName;
+                        authorPhotoID = acc.profile.photoID;
                         //console.log( authorName);
 
                         });
@@ -88,12 +92,13 @@ Template.explore.events( {
                       content  : content,
                       authorID : authorID,
                       authorName : authorName,
+                      photoID   : authorPhotoID,
 
                       };
 
         Meteor.call('postComment', data );
 
-        
+
         //now clear the post input field
 
         $('.comment').val("").select().focus();

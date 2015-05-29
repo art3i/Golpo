@@ -165,6 +165,7 @@ Meteor.methods({
 
        authorID   : data.authorID,
        authorName : data.authorName,
+       photoID    : data.photoID,
 
         content   : data.content,
         date      : new Date(),
@@ -186,6 +187,7 @@ Meteor.methods({
         parentID  : data.parentID,
        authorID   : data.authorID,
        authorName : data.authorName,
+       photoID    : data.photoID,
 
         content   : data.content,
         date      : new Date(),
@@ -207,7 +209,7 @@ Meteor.methods({
 // this is to clear all db collections during development.
 //here ~ remove({}) ~ this {} is needed to remove all documents
 
-// comment out this method before deployment
+// comment out this method before deployment or use admin only authintication like if user==admin checking
 
 //   Meteor.call('clearAllDB');
 
@@ -217,7 +219,8 @@ Meteor.methods({
       Meteor.users.remove({});
       StoryBook.remove({});
       StoryOpinion.remove({});
-      console.log( " Meteor.users.removeD ");
+      Images.remove({});
+      console.log( " all collections removed from server ");
 
 
     },

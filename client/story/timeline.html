@@ -13,8 +13,11 @@
 
             <div class="avatar pull-left">
 
-              <a href="#" > <img src="pimg/{{authorID}}.jpg" width="60px" height="60px" alt="" />  </a>
+              {{#each getAuthorPhoto}}
 
+              <a href="#" > <img src="{{url}}" width="60px" height="60px" alt="" />  </a>
+
+              {{/each}}
             </div>
 
             <div class="nameMeta ">
@@ -50,8 +53,11 @@
 
              <div class="avatarOpinion pull-left">
 
-               <a href="#" > <img src="pimg/{{authorID}}.jpg" width="40px" height="40px" alt="" />  </a>
+               {{#each getAuthorPhoto}}
+               <a href="#" > <img src="{{url}}" width="40px" height="40px" alt="" />  </a>
 
+                {{/each}}
+                
              </div>
 
              <div class="nameMeta ">

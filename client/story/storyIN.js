@@ -26,12 +26,14 @@ Template.storyIN.events( {
         var privacy = "public";
         var authorID = Meteor.userId();
         var authorName;
+        var authorPhotoID;
 
         var authorAccount=Meteor.users.find({"_id": authorID});
 
         authorAccount.forEach(function (acc) {
 
                         authorName = acc.profile.fullName;
+                        authorPhotoID = acc.profile.photoID;
                         //console.log( authorName);
 
                         });
@@ -42,6 +44,7 @@ Template.storyIN.events( {
                       privacy: privacy,
                       authorID : authorID,
                       authorName : authorName,
+                      photoID   : authorPhotoID,
 
                       };
 

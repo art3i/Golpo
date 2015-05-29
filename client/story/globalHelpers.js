@@ -15,21 +15,15 @@ Template.registerHelper('formatDate', function(date) {
 
 });
 
-Template.registerHelper('allProfilePhoto', function() {
-
-  var profilePhotoID;
-
-  var userAccount=Meteor.users.find({"_id": Meteor.userId()});
-
-  userAccount.forEach(function (userDB) {
-
-                profilePhotoID = userDB.profile.photoID;
-                   console.log( profilePhotoID);
-
-                  });
+Template.registerHelper('getAuthorPhoto', function() {
 
 
-  return Images.find({"_id": profilePhotoID});
+
+    return Images.find({"_id": this.photoID});
+
+      //getAuthorPhoto will run within the getMyStory or getCurrentStoryComments loop. so the parent loop
+      // will already contain the photoID;
+
 
   // Images is an FS.Collection instance
 

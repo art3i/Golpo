@@ -6,6 +6,7 @@ Template.timeline.rendered = function (){
     Meteor.subscribe("myStory", Meteor.userId());
 
     Meteor.subscribe("storyOpinionDB", Meteor.userId());
+    Meteor.subscribe("images");
 
   })
 
@@ -29,7 +30,7 @@ Template.timeline.helpers({
   //  console.log( "getCurrentStoryComments called");
     return StoryOpinion.find({"parentID": this._id});
 
-    //this._id holds current StoryBook._id value within the loop.
+    //this._id holds current StoryBook._id value within the loop from the outermost loop.
 
     // I called getCurrentStoryComments within the getMyStory Template loop. so here, value of
     // _id will change on each loop and thus match the parentID of StoryOpinion db.
@@ -39,11 +40,15 @@ Template.timeline.helpers({
 
 
 
-
-getMyProfile : function () {
-
-return Meteor.users.find({"_id": Meteor.userId()});
-},
+// 
+// getAuthorPhoto : function () {
+//
+//   return Images.find({"_id": this.photoID});
+//
+//     //getAuthorPhoto will run within the getMyStory or getCurrentStoryComments loop. so the parent loop
+//     // will already contain the photoID;
+//
+// },
 
 
 });
