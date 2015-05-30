@@ -41,9 +41,9 @@ Meteor.publish("storyOpinionDB" , function(userId){
 
 
 
-Meteor.publish("likes", function(postId){
+Meteor.publish("like", function(){
 
-      return Likes.find({post:postId});
+      return Like.find();
 
 });
 
@@ -172,6 +172,8 @@ Meteor.methods({
         isPublish : data.isPublish,
         privacy   : data.privacy,
 
+      likeCounter : 0, //initial like is zero
+
     });
 
         console.log("new story added to StoryBook by : " + data.authorName );
@@ -192,6 +194,8 @@ Meteor.methods({
         content   : data.content,
         date      : new Date(),
 
+      likeCounter : 0, //initial like is zero
+
 
     });
 
@@ -200,6 +204,126 @@ Meteor.methods({
   },
 
   // ------------- END  post comment method -------------
+
+
+    'likeStory' : function (data){
+
+    try{
+      //useing try...catch here, because "likeDB" will not be there before user even like the story for the 1st time ,
+      //thus if block will return undifined and thus exception will be raised!
+
+          if(data.likedByID == Like.findOne( { $and: [ {"parentID": data.parentID}, { "likedByID": data.likedByID } ] } ).likedByID)
+
+              {
+                // likedByID matched means this user has already liked this exact post before.
+                // so now it means its a 2nd time click on the same like button ;
+                // that suggests that user wants to remove this like
+
+                Like.remove( { $and: [ {"parentID": data.parentID}, { "likedByID": data.likedByID} ] } );
+
+                 //adjusting the likeCounter on parent story/parentCommentDB
+
+                StoryBook.update(data.parentID, {$inc:
+                                          {
+                                            "likeCounter": -1,
+
+                                           }  });
+
+               console.log("like removed successfully"+" from try > if block by "+data.likedByName);
+
+              } //end if
+
+                      else {
+                              // this "else block" means this user haven't liked this post yet . and the above query somehow failed to raise exception
+                            // quering the "not yet created db" ~ which usually will never happen ; But still Keeping this block as a fail-safe ,
+                            // if somehow no-exception is raised Then this else block will be there to handle the logic
+
+                            Like.insert({
+
+                                parentID  : data.parentID,
+                               likedByID  : data.likedByID,
+                              likedByName : data.likedByName,
+
+                            });
+                            StoryBook.update(data.parentID, {$inc:
+                                                      {
+                                                        "likeCounter": 1,
+                                                       }  });
+                                                       console.log("like added successfully"+" from try > else block by "+data.likedByName);
+
+                              } //end else
+
+      } //end try
+
+      catch (error) {
+                  // this means user haven't like this post yet; so there is no likeDB to query and thus this exception.
+                  // so, now lets add a like
+                Like.insert({
+                    parentID  : data.parentID,
+                   likedByID  : data.likedByID,
+                  likedByName : data.likedByName,
+
+                            });
+
+                // updating likeCounter of story db
+                StoryBook.update(data.parentID, {$inc:
+                                          {
+                                            "likeCounter": 1,
+
+                                           }  });
+
+                           console.log("like added successfully"+" from catch block by  "+ data.likedByName);
+                    } //end catch
+
+    },
+
+  // -------------------- END  likeStory  method -------------
+
+  'likeOpinion' : function (data){
+
+  try{
+
+        if(data.likedByID == Like.findOne( { $and: [ {"parentID": data.parentID}, { "likedByID": data.likedByID } ] } ).likedByID)
+
+            {
+              // likedByID matched means this user has already liked this exact post before.
+
+              Like.remove( { $and: [ {"parentID": data.parentID}, { "likedByID": data.likedByID} ] } );
+
+              StoryOpinion.update(data.parentID, {$inc: {"likeCounter": -1} });
+
+            } //end if
+                    else {
+                              Like.insert({
+
+                                      parentID  : data.parentID,
+                                     likedByID  : data.likedByID,
+                                    likedByName : data.likedByName,
+
+                                    });
+                              StoryOpinion.update(data.parentID, {$inc: { "likeCounter": 1}  });
+
+                            } //end else
+
+    } //end try
+
+    catch (error) {
+                // this means user haven't like this post yet; so there is no likeDB to query. so lets add a like
+              Like.insert({
+                  parentID  : data.parentID,
+                 likedByID  : data.likedByID,
+                likedByName : data.likedByName,
+
+                          });
+              StoryOpinion.update(data.parentID, {$inc:{ "likeCounter": 1, }  });
+
+              } //end catch
+
+  },
+
+
+    // ------------- END  likeOpinion  method -------------
+
 
 
 
@@ -214,12 +338,13 @@ Meteor.methods({
 //   Meteor.call('clearAllDB');
 
 
-      Likes.remove({});
-      StoryBook.remove({});
-      Meteor.users.remove({});
-      StoryBook.remove({});
-      StoryOpinion.remove({});
-      Images.remove({});
+       StoryBook.remove({});
+      // Meteor.users.remove({});
+      // StoryBook.remove({});
+      // StoryOpinion.remove({});
+      // Images.remove({});
+
+      Like.remove({});
       console.log( " all collections removed from server ");
 
 
@@ -243,10 +368,7 @@ Meteor.users.update(info.loginID, {$set:
                            "profile.location": info.location,
 
                            }
-
-
                            });
-
 
   console.log( " inServer - profile data updated by " + info.fullName + " & dbID: " + info.loginID);
 

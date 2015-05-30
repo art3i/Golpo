@@ -6,10 +6,10 @@ Template.explore.rendered = function (){
     Meteor.subscribe("worldStory", Meteor.userId());
     Meteor.subscribe("storyOpinionDB", Meteor.userId());
 
-    Meteor.subscribe("storytellers", Meteor.userId());
 
     Meteor.subscribe("images");
 
+    Meteor.subscribe("like");
 
   })
 
@@ -25,13 +25,6 @@ Template.explore.helpers({
 },
 
 
-getStorytellers: function () {
-
-return Meteor.users.find();
-},
-
-
-
   getCurrentStoryComments : function () {
   //  console.log( "getCurrentStoryComments called");
     return StoryOpinion.find({"parentID": this._id});
@@ -40,6 +33,60 @@ return Meteor.users.find();
 
     // I called getCurrentStoryComments within the getMyStory Template loop. so here, value of
     // _id will change on each loop and thus match the parentID of StoryOpinion db.
+
+
+},
+
+
+likeButtonState: function () {
+
+  //return like=true to active likeButton; unlike=true to active undoLike button
+
+  // Like.find( { $and: [ {"parentID": "2j2dbCmW6S4Bq8uPi"}, { "likedByID": "TCfRjbKpinveR6xy7"} ] } ).fetch();
+  // Like.findOne( { $and: [ {"parentID": "eM9jHFPimXMqEB6Cm"}, { "likedByID": "TCfRjbKpinveR6xy7"} ] } ).likedByID;
+
+  var state = {
+                //init state
+                like : true,
+                unlike : false,
+                }
+
+  try
+  {
+       if(Meteor.userId() == Like.findOne( { $and: [ {"parentID": this._id}, { "likedByID": Meteor.userId() } ] } ).likedByID)
+
+                // this helper will run within the getStory loop; so "this._id" means parent story id.
+              {
+                        // this if=true means user already liked this post. Let's show unlike state of toggle button
+                        //  console.log("I liked this story already of ID : "+this._id);
+                  state.unlike = true;
+                  state.like= false;
+                  return state;
+              }
+
+              else
+
+                     {      //  console.log("I haven't liked this story yet BUT sm1 did - storyID : "+this._id);
+                            state.unlike = false;
+                            state.like= true;
+                            return state;
+                      }
+
+  } //end try
+
+  catch (error)
+
+      {
+        // exception occured - because this like DB haven't created yet & query in if block failed.
+        //this happened because  No One or this user hasn't liked this story yet.
+              //  Lets set btn state to like button
+                      //console.log("Like button exception!! NO1 liked it yet storyID:  "+this._id+error);
+        state.unlike = false;
+        state.like= true;
+        return state;
+
+
+      } //end catch
 
 
 },
@@ -74,18 +121,10 @@ Template.explore.events( {
       //  console.log(parentID +" " + content );
 
         var authorID = Meteor.userId();
-        var authorName;
-        var authorPhotoID;
 
-        var authorAccount=Meteor.users.find({"_id": authorID});
+        var authorName= Meteor.users.findOne({"_id": authorID}).profile.fullName;
 
-        authorAccount.forEach(function (acc) {
-
-                        authorName = acc.profile.fullName;
-                        authorPhotoID = acc.profile.photoID;
-                        //console.log( authorName);
-
-                        });
+        var authorPhotoID = Meteor.users.findOne({"_id": authorID}).profile.photoID;;
 
 
         var data= {   parentID : parentID ,
@@ -107,6 +146,32 @@ Template.explore.events( {
 
 
   },
+
+  // ------------ END postComment event --------------------------
+
+  'submit .favButtonForm' : function (event, tmpl){
+
+    event.preventDefault();
+
+    var parentID = event.target.currentStoryID.value;
+    var likedByID = Meteor.userId();
+    var likedByName =Meteor.users.findOne({"_id": Meteor.userId()}).profile.fullName;
+
+
+    var data= {   parentID  : parentID,
+                 likedByID  : likedByID,
+                likedByName : likedByName,
+
+                  };
+
+
+     Meteor.call('likeStory', data );
+
+     //console.log("fav btn clicked by "+ likedByName);
+
+  },
+
+
 
 
 });

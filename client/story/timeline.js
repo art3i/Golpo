@@ -40,7 +40,7 @@ Template.timeline.helpers({
 
 
 
-// 
+//
 // getAuthorPhoto : function () {
 //
 //   return Images.find({"_id": this.photoID});
@@ -77,22 +77,18 @@ Template.timeline.events( {
         console.log(parentID +" " + content );
 
         var authorID = Meteor.userId();
-        var authorName;
 
-        var authorAccount=Meteor.users.find({"_id": authorID});
+        var authorName= Meteor.users.findOne({"_id": authorID}).profile.fullName;
 
-        authorAccount.forEach(function (acc) {
+        var authorPhotoID = Meteor.users.findOne({"_id": authorID}).profile.photoID;;
 
-                        authorName = acc.profile.fullName;
-                        //console.log( authorName);
-
-                        });
 
 
         var data= {   parentID : parentID ,
                       content  : content,
                       authorID : authorID,
                       authorName : authorName,
+                      photoID   : authorPhotoID,
 
                       };
 

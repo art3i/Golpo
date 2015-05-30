@@ -30,6 +30,29 @@
 
       <p class="storyContent"> {{ content }} </p>
 
+        <div>
+
+          <form class="favButtonForm">
+
+              <input type="hidden" name="currentStoryID" value="{{this._id}}">
+
+                {{#with likeButtonState}}
+
+                    {{#if this.like}}
+
+      <button type="submit" class="favButton like" >  <span class="glyphicon glyphicon-heart-empty"> </span> </button>
+                      {{/if}}
+
+                  {{#if this.unlike}}
+     <button type="submit" class="favButton unlike"> <span class="glyphicon glyphicon-heart"> </span> </button>
+
+                  {{/if}}
+
+                {{/with}}
+
+        </form>
+
+      </div>
 
 
            <div class="well well-large col-lg-10">

@@ -25,18 +25,11 @@ Template.storyIN.events( {
         var content = tmpl.find('#storyInput').value;
         var privacy = "public";
         var authorID = Meteor.userId();
-        var authorName;
-        var authorPhotoID;
+        var authorName= Meteor.users.findOne({"_id": authorID}).profile.fullName;
 
-        var authorAccount=Meteor.users.find({"_id": authorID});
+        var authorPhotoID = Meteor.users.findOne({"_id": authorID}).profile.photoID;;
 
-        authorAccount.forEach(function (acc) {
 
-                        authorName = acc.profile.fullName;
-                        authorPhotoID = acc.profile.photoID;
-                        //console.log( authorName);
-
-                        });
 
 
         var data= {   content : content ,

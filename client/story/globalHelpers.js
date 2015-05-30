@@ -21,11 +21,11 @@ Template.registerHelper('getAuthorPhoto', function() {
 
     return Images.find({"_id": this.photoID});
 
-      //getAuthorPhoto will run within the getMyStory or getCurrentStoryComments loop. so the parent loop
+      //getAuthorPhoto will run within the getMyStory / getWorldStory or getCurrentStoryComments loop. so the parent loop
       // will already contain the photoID;
 
 
-  // Images is an FS.Collection instance
+  // here, Images is an FS.Collection instance
 
 
 });

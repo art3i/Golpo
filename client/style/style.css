@@ -52,7 +52,24 @@
     margin-bottom: 5px;
 }
 
+/* -------- Favourite Button ----------- */
 
+.favButton{
+
+    border: 0px;
+    background: none;
+    margin-left: 74px;
+}
+
+.favButton:active, .favButton:hover, .favButton:visited{
+  border: 0px;
+
+}
+
+.unlike .glyphicon-heart {
+
+  color: #F6546A;
+}
 
 /* -------- CONTENT ----------- */
 
