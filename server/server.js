@@ -338,14 +338,15 @@ Meteor.methods({
 //   Meteor.call('clearAllDB');
 
 
-       StoryBook.remove({});
+
       // Meteor.users.remove({});
-      // StoryBook.remove({});
-      // StoryOpinion.remove({});
+       StoryBook.remove({});
+       StoryOpinion.remove({});
       // Images.remove({});
 
-      Like.remove({});
-      console.log( " all collections removed from server ");
+       Like.remove({});
+       
+          console.log( " removed ... ");
 
 
     },

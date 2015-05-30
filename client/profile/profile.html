@@ -24,18 +24,18 @@
 
   {{#each userDetail}}
 
-  <p> User ID: <i> {{_id}} </i> </P>
-
-
-      {{#each this.emails}}
-
-    <p>  Email : {{this.address}}  </P>
-
-      {{/each}}
-
 
     <p>  Name : {{this.profile.fullName}}  </P>
     <p>  Location : {{this.profile.location}}  </P>
+
+    <p> User ID: <small> {{_id}} </small> </P>
+
+
+        {{#each this.emails}}
+
+    <p>  Email : {{this.address}}  </P>
+
+        {{/each}}
 
 
 

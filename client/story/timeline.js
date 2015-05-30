@@ -105,5 +105,58 @@ Template.timeline.events( {
 
   },
 
+  // ---------------- END comment post form event --------------------------------
+
+
+  'submit .favButtonForm' : function (event, tmpl){
+
+    event.preventDefault();
+
+    var parentID = event.target.currentStoryID.value;
+    var likedByID = Meteor.userId();
+    var likedByName =Meteor.users.findOne({"_id": Meteor.userId()}).profile.fullName;
+
+
+    var data= {   parentID  : parentID,
+                 likedByID  : likedByID,
+                likedByName : likedByName,
+
+                  };
+
+
+     Meteor.call('likeStory', data );
+
+     //console.log("fav btn clicked by "+ likedByName);
+
+  },
+
+  // ------------ END add Like to story event --------------------------
+
+
+  'submit .opinionLikeButtonForm' : function (event, tmpl){
+
+    event.preventDefault();
+
+    var parentID = event.target.currentStoryID.value;
+    var likedByID = Meteor.userId();
+    var likedByName =Meteor.users.findOne({"_id": Meteor.userId()}).profile.fullName;
+
+
+    var data= {   parentID  : parentID,
+                 likedByID  : likedByID,
+                likedByName : likedByName,
+
+                  };
+
+
+     Meteor.call('likeOpinion', data );
+
+     //console.log("fav btn clicked by "+ likedByName);
+
+  },
+
+  // ------------ END add Like to Opinion event --------------------------
+
+
 
 });

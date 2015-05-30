@@ -4,6 +4,7 @@
 */
 
 
+
 .navbar-fixed-top {max-height:50px;}
 
 #signOutBtn{
@@ -15,6 +16,7 @@
   padding-left: 0px;
 
 }
+
 
 .body-content{ }
 
@@ -52,6 +54,8 @@
     margin-bottom: 5px;
 }
 
+
+
 /* -------- Favourite Button ----------- */
 
 .favButton{
@@ -71,11 +75,44 @@
   color: #F6546A;
 }
 
+.like .glyphicon-thumbs-up{
+
+  color: #6897bb;
+}
+
+.unlike .glyphicon-thumbs-up{
+
+  color: #1e90ff;
+  font-weight: bold;
+}
+
+.favButtonDiv{
+    border-top: 1px solid rgb(232, 232, 232);
+    margin-top: 10px;
+    margin-bottom:15px;
+}
+
+.likeButton {
+    border: 0px;
+    background: none;
+    margin-left: 56px;
+}
+
+
 /* -------- CONTENT ----------- */
 
 .storyContent {
 
     margin-left: 80px;
+    font-size: 16px;
+    letter-spacing: 0.001em;
+
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    /*
+
+    font-family: Century Gothic, sans-serif;
+
+    */
 }
 .opinionContent{
 

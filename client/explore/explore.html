@@ -30,7 +30,7 @@
 
       <p class="storyContent"> {{ content }} </p>
 
-        <div>
+        <div class="favButtonDiv">
 
           <form class="favButtonForm">
 
@@ -50,12 +50,16 @@
 
                 {{/with}}
 
+          <i class="favStat"> {{this.likeCounter}}  people liked it! </i>
+
         </form>
+
+
 
       </div>
 
 
-           <div class="well well-large col-lg-10">
+           <div class="well col-lg-10 col-lg-offset-1">
 
              <form class="commentINform form-horizontal" role="form">
 
@@ -92,6 +96,37 @@
              </div>
 
             <p class="opinionContent"> {{content}} </p>
+
+
+            <div class="favButtonDiv">
+
+              <form class="opinionLikeButtonForm">
+
+                  <input type="hidden" name="currentStoryID" value="{{this._id}}">
+
+                    {{#with likeButtonState}}
+
+                        {{#if this.like}}
+
+          <button type="submit" class="likeButton like" >  <span class="glyphicon glyphicon-thumbs-up"> </span> </button>
+                          {{/if}}
+
+                      {{#if this.unlike}}
+         <button type="submit" class="likeButton unlike"> <span class="glyphicon glyphicon-thumbs-up"> </span> </button>
+
+                      {{/if}}
+
+                    {{/with}}
+
+              <i class="favStat"> {{this.likeCounter}}  upvotes! </i>
+
+            </form>
+
+
+
+          </div>
+
+
 
               {{/each}}
 
