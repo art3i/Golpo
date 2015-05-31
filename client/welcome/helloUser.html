@@ -1,0 +1,83 @@
+<template name="helloUser">
+
+  <div class="container">
+
+  <div class="jumbotron col-lg-10">
+   <h2> Welcome to the community! </h2>
+   <h3> <small> Lets tell us more about yousefl ! </small> </h3>
+
+<br> <br>
+
+<div class="row">
+
+<div class="col-lg-10">
+
+   <form id="profileUpdateForm" class="form-horizontal" role="form">
+
+
+
+     <div class="form-group">
+       <label for="Name" class="col-lg-4 control-label"> Full Name </label>
+
+       <div class="col-lg-8">
+         <input type="text" class="form-control" id="fullName" placeholder="Name ...">
+
+       </div>  <!--  -->
+
+     </div>	 <!--   -->
+
+
+
+
+     <div class="form-group">
+       <label for="Location" class="col-lg-4 control-label"> Location </label>
+
+       <div class="col-lg-8">
+         <input type="text" class="form-control" id="location" placeholder=" Your city ... ">
+
+       </div>  <!--  -->
+
+     </div>	 <!--   -->
+
+
+
+
+     <!-- form submit button -->
+  <div class="form-group">
+    <div class="col-lg-2 pull-right">
+
+      <button type="submit" name="submit" class="btn btn-primary" style="width:100%;"> Update </button>
+
+    </div>
+  </div>	 <!-- end form group -->
+
+</form>
+</div>
+
+</div>  <!-- end 1st row -->
+
+<div class="row">
+
+<div class="col-lg-6 col-lg-offset-4">
+
+<h3> Upload Profile Photo </h3>
+
+    <small> <em> Recomended file size : less than 1 MB </em> </small> <br>
+
+          <br>
+        <div class="col-lg-8">
+            <input type="file" class="myFileInput" name="profilePhoto">
+
+        </div>
+</div>
+
+</div>
+
+</div> <!-- END jumbotron  -->
+
+
+ </div> <!-- end container  -->
+
+
+
+</template>

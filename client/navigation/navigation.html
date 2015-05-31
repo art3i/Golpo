@@ -13,8 +13,15 @@
       <li class=""> <a href="{{pathFor 'message'}}"> Message</a> </li>
 
     </ul>
+    {{#each userDetail}}
 
-    <button class="btn btn-info btn-sm navbar-btn pull-right" id="signOutBtn" > Logout </button>
+    <span class="user-name  pull-right"> Welcome Back <strong> <a href="{{pathFor 'profile'}}" > {{this.profile.fullName}} ! </a> &#160; &nbsp; </strong>
+
+        <button class="btn btn-info btn-sm navbar-btn" id="signOutBtn" > Logout </button>
+
+      </span>
+        {{/each}}
+
 {{/if}}
 </nav>
 

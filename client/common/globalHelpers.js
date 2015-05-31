@@ -40,6 +40,22 @@ Template.registerHelper('getAuthorPhoto', function() {
 // ------------------------------------------------------------------------------------------------------
 
 
+Template.registerHelper('userDetail', function() {
+
+     //console.log(Meteor.users.find());
+   return Meteor.users.find({"_id": Meteor.userId()});
+  // return Meteor.users.find();
+
+
+});
+
+// ------------------------------------------------------------------------------------------------------
+// -----------------------------------  END userDetail ------------------------------------------------
+// ------------------------------------------------------------------------------------------------------
+
+
+
+
 Template.registerHelper('likeButtonState' , function () {
 
     //return like=true to active likeButton; unlike=true to active undoLike button
@@ -97,4 +113,3 @@ Template.registerHelper('likeButtonState' , function () {
   // ------------------------------------------------------------------------------------------------------
   // -----------------------------------  END likeButtonState For Story ------------------------------------------------
   // ------------------------------------------------------------------------------------------------------
- 

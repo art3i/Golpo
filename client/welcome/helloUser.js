@@ -1,7 +1,7 @@
 // to show some test data during development
 
 
-Template.profile.rendered = function (){
+Template.helloUser.rendered = function (){
 
   Tracker.autorun(function(){
 
@@ -18,7 +18,7 @@ Template.profile.rendered = function (){
 
 
 
-Template.profile.helpers({
+Template.helloUser.helpers({
 
 
   myProfilePic: function () {
@@ -49,7 +49,7 @@ Template.profile.helpers({
 
 // ---------------------- Capturing form data for updating user profile --------------------
 
-Template.profile.events( {
+Template.helloUser.events( {
 
   'change .myFileInput': function(event, template) {
 
@@ -78,35 +78,6 @@ Template.profile.events( {
            });
       });
     },
-
-
-
-
-
-
-
-  // 'change .myFileInput': function(event, template) {
-  //
-  //    FS.Utility.eachFile(event, function(file) {
-  //
-  //
-  //      var data= {
-  //
-  //        file : file,
-  //        userId : Meteor.userId(),
-  //
-  //      };
-  //
-  //      Meteor.call('saveImage', data );
-  //
-  //      //alert(data.file);
-  //
-  //   });
-  // },
-
-
-
-
 
 
   'submit #profileUpdateForm' : function (e, tmpl){

@@ -6,6 +6,10 @@
 
 
 .navbar-fixed-top {max-height:50px;}
+.user-name a:hover, a{
+    text-decoration: none;
+    text-transform: capitalize;
+}
 
 #signOutBtn{
   margin-right: 50px;
@@ -162,6 +166,14 @@
       PROFILE
    ---------------------------------------------------------
 */
+
+.viewProfileInfo {
+
+
+}
+.viewProfilePhoto{
+  border-right: 1px solid #FFF;
+}
 
 .showProfileData {
 

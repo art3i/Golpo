@@ -1,3 +1,4 @@
+  
 // ----------------------------------------------------------------------------------------
 // -------------- PUBLICATIONS ------------------------
 // ----------------------------------------------------------------------------------------
@@ -339,13 +340,13 @@ Meteor.methods({
 
 
 
-      // Meteor.users.remove({});
+       Meteor.users.remove({});
        StoryBook.remove({});
        StoryOpinion.remove({});
-      // Images.remove({});
+       Images.remove({});
 
        Like.remove({});
-       
+
           console.log( " removed ... ");
 
 

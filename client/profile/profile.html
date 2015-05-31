@@ -8,19 +8,34 @@
 
   <div class="row">
 
-    <div class="col-lg-8 showProfileData">
+    <div class="col-lg-10 well showProfileData">
 
-  <h3> MY PROFILE  </h3>
+
+<div class="col-lg-4 viewProfilePhoto">
 
   {{#each myProfilePic}}
 
   <div>
-        <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt="" class="" width="200px" height="200px" /></a>
+        <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt="" class="" width="220px" height="200px" /></a>
   </div>
 
   {{/each}}
 
+<br> <br>
 
+          <h4> Update Profile Photo </h4>
+
+          <small> <em> Recomended file size : less than 1 MB </em> </small>
+
+          <br> <br>
+          <div>
+                <input type="file" class="myFileInput" name="profilePhoto">
+          </div>
+
+
+</div>  <!-- END profile photo display and upload part -->
+
+<div class="col-lg-8 viewProfileInfo">
 
   {{#each userDetail}}
 
@@ -43,35 +58,26 @@
 
 {{/each}}
 
-    </div>
+</div>  <!-- END profile info display div  -->
 
-</div>
+    </div>  <!-- END well -->
+
+
+</div>  <!-- END row -->
 
 </div> <!-- END profile container -->
 
 
-<hr>
-
 <div class="container">
 
-<h3> Change Profile Photo </h3>
+  <div class="row">
 
-<small> <em> Recomended file size : less than 1 MB </em> </small> <br>
-
-<br>
-    <div class="col-lg-8">
-        <input type="file" class="myFileInput" name="profilePhoto">
-
-    </div>
-
-<br> <br> <hr>
+<div class="well col-lg-10">
 
 
+  <h4 class="col-lg-4 col-lg-offset-3"> Update Personal Details </h4>
 
-
-  <h3> Update Profile Info </h3>
-
-<br> <br>
+<br> <br> <br>
 
         <div class="col-lg-8">
 
@@ -119,6 +125,9 @@
 
 
 </div>
+    </div> <!-- end row -->
+
+  </div> <br> <!-- end Update Profile Info container -->
 
 {{/if}}
 
