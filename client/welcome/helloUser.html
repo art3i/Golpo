@@ -1,5 +1,11 @@
 <template name="helloUser">
 
+  {{#if currentUser}}
+
+
+        {{#if Template.subscriptionsReady}}
+
+
   <div class="container">
 
   <div class="jumbotron col-lg-10">
@@ -78,6 +84,12 @@
 
  </div> <!-- end container  -->
 
+        {{else}}
 
+        <p> Loading ... </p>
+
+        {{/if}}
+
+      {{/if}}
 
 </template>
